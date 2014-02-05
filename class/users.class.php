@@ -935,7 +935,7 @@ class GlobalAccountsUsersGUIDataList extends GlobalAccountsGUIDataList
      * Property to store the possible actions - used to build action buttons
      */
     var $__empty_actions = array(
-         "add" => WPGA_USERS_ADD_USER
+         //"add" => WPGA_USERS_ADD_USER
     ) ;
 
     /**
@@ -1154,7 +1154,7 @@ class GlobalAccountsUsersAdminGUIDataList extends GlobalAccountsUsersGUIDataList
     var $__normal_actions = array(
          "profile" => WPGA_ACTION_PROFILE
         ,"directory" => WPGA_ACTION_DIRECTORY
-        ,"add" => WPGA_ACTION_ADD
+        //,"add" => WPGA_ACTION_ADD
         ,"update" => WPGA_ACTION_UPDATE
         ,"delete" => WPGA_ACTION_DELETE
     ) ;

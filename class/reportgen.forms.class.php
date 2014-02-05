@@ -11,7 +11,7 @@
  * (c) 2007 by Mike Walsh
  *
  * @author Mike Walsh <mike_walsh@mindspring.com>
- * @package Wp-SwimTeam
+ * @package Wp-TeamMember
  * @subpackage Reports
  * @version $Revision$
  * @lastmodified $Author$
@@ -30,9 +30,9 @@ define("FEFILTERLB", FEFILTER . " Listbox") ;
  *
  * @author Mike Walsh <mike_walsh@mindspring.com>
  * @access public
- * @see WpSwimTeamForm
+ * @see WpTeamForm
  */
-class WpSwimTeamReportGeneratorForm extends WpSwimTeamForm
+class WpTeamReportGeneratorForm extends WpTeamForm
 {
     /**
      * generated report
@@ -93,8 +93,8 @@ class WpSwimTeamReportGeneratorForm extends WpSwimTeamForm
         $results = new FECheckBox("Results") ;
         $this->add_element($results) ;
 
-        $swimmerlabel = new FECheckBox("Swimmer Label") ;
-        $this->add_element($swimmerlabel) ;
+        $team memberlabel = new FECheckBox("Team Member Label") ;
+        $this->add_element($team memberlabel) ;
 
         $websitreid = new FECheckBox("Web Site Id") ;
         $this->add_element($websitreid) ;
@@ -137,37 +137,37 @@ class WpSwimTeamReportGeneratorForm extends WpSwimTeamForm
         )) ;
         $this->add_element($send_to) ;
 
-        // Optional swimmer field #1
+        // Optional team member field #1
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION1) != WPST_DISABLED)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION1) != WPST_DISABLED)
         {
-            $option1 = new FECheckBox(get_option(WPST_OPTION_SWIMMER_OPTION1_LABEL)) ;
+            $option1 = new FECheckBox(get_option(WPST_OPTION_TEAM_MEMBER_OPTION1_LABEL)) ;
             $this->add_element($option1) ;
 
             // Field is enabled, can it be a filter?
  
-            if (get_option(WPST_OPTION_SWIMMER_OPTION1) == WPST_YES_NO)
+            if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION1) == WPST_YES_NO)
             {
-                $option1filtercb = new FECheckBox(get_option(WPST_OPTION_SWIMMER_OPTION1_LABEL) . FEFILTER) ;
-                $option1filter = new FEYesNoListBox(get_option(WPST_OPTION_SWIMMER_OPTION1_LABEL) . FEFILTERLB) ;
+                $option1filtercb = new FECheckBox(get_option(WPST_OPTION_TEAM_MEMBER_OPTION1_LABEL) . FEFILTER) ;
+                $option1filter = new FEYesNoListBox(get_option(WPST_OPTION_TEAM_MEMBER_OPTION1_LABEL) . FEFILTERLB) ;
                 $this->add_element($option1filtercb) ;
                 $this->add_element($option1filter) ;
             }
         }
 
-        // Optional swimmer field #2
+        // Optional team member field #2
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION2) != WPST_DISABLED)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION2) != WPST_DISABLED)
         {
-            $option2 = new FECheckBox(get_option(WPST_OPTION_SWIMMER_OPTION2_LABEL)) ;
+            $option2 = new FECheckBox(get_option(WPST_OPTION_TEAM_MEMBER_OPTION2_LABEL)) ;
             $this->add_element($option2) ;
 
             // Field is enabled, can it be a filter?
  
-            if (get_option(WPST_OPTION_SWIMMER_OPTION2) == WPST_YES_NO)
+            if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION2) == WPST_YES_NO)
             {
-                $option2filtercb = new FECheckBox(get_option(WPST_OPTION_SWIMMER_OPTION2_LABEL) . FEFILTER) ;
-                $option2filter = new FEYesNoListBox(get_option(WPST_OPTION_SWIMMER_OPTION2_LABEL) . FEFILTERLB) ;
+                $option2filtercb = new FECheckBox(get_option(WPST_OPTION_TEAM_MEMBER_OPTION2_LABEL) . FEFILTER) ;
+                $option2filter = new FEYesNoListBox(get_option(WPST_OPTION_TEAM_MEMBER_OPTION2_LABEL) . FEFILTERLB) ;
                 $this->add_element($option2filtercb) ;
                 $this->add_element($option2filter) ;
             }
@@ -197,7 +197,7 @@ class WpSwimTeamReportGeneratorForm extends WpSwimTeamForm
         $this->set_element_value("Secondary Contact Detail", false) ;
         $this->set_element_value("Results", false) ;
         $this->set_element_value("Status", false) ;
-        $this->set_element_value("Swimmer Label", true) ;
+        $this->set_element_value("Team Member Label", true) ;
         $this->set_element_value("Web Site Id", false) ;
         $this->set_element_value("Results" . FEFILTER, false) ;
         $this->set_element_value("Status" . FEFILTER, true) ;
@@ -223,7 +223,7 @@ class WpSwimTeamReportGeneratorForm extends WpSwimTeamForm
 
     /**
      * This is the method that builds the layout of
-     * the Swim Team plugin options.
+     * the Team Member Team plugin options.
      *
      */
     function &_report_options()
@@ -252,32 +252,32 @@ class WpSwimTeamReportGeneratorForm extends WpSwimTeamForm
         $table->add_row($this->element_form("Status"),
             $this->element_form("Results")) ;
 
-        $table->add_row($this->element_form("Swimmer Label"),
+        $table->add_row($this->element_form("Team Member Label"),
             $this->element_form("Web Site Id")) ;
 
-        //  Optional swimmer field #1
+        //  Optional team member field #1
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION1) != WPST_DISABLED)
-            $table->add_row($this->element_form(get_option(WPST_OPTION_SWIMMER_OPTION1_LABEL))) ;
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION1) != WPST_DISABLED)
+            $table->add_row($this->element_form(get_option(WPST_OPTION_TEAM_MEMBER_OPTION1_LABEL))) ;
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION2) != WPST_DISABLED)
-            $table->add_row($this->element_form(get_option(WPST_OPTION_SWIMMER_OPTION2_LABEL))) ;
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION2) != WPST_DISABLED)
+            $table->add_row($this->element_form(get_option(WPST_OPTION_TEAM_MEMBER_OPTION2_LABEL))) ;
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION3) != WPST_DISABLED)
-            $table->add_row($this->element_form(get_option(WPST_OPTION_SWIMMER_OPTION3_LABEL))) ;
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION3) != WPST_DISABLED)
+            $table->add_row($this->element_form(get_option(WPST_OPTION_TEAM_MEMBER_OPTION3_LABEL))) ;
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION4) != WPST_DISABLED)
-            $table->add_row($this->element_form(get_option(WPST_OPTION_SWIMMER_OPTION4_LABEL))) ;
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION4) != WPST_DISABLED)
+            $table->add_row($this->element_form(get_option(WPST_OPTION_TEAM_MEMBER_OPTION4_LABEL))) ;
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION5) != WPST_DISABLED)
-            $table->add_row($this->element_form(get_option(WPST_OPTION_SWIMMER_OPTION5_LABEL))) ;
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION5) != WPST_DISABLED)
+            $table->add_row($this->element_form(get_option(WPST_OPTION_TEAM_MEMBER_OPTION5_LABEL))) ;
 
         return $table ;
     }
 
     /**
      * This is the method that builds the layout of
-     * the Swim Team plugin options.
+     * the Team Member Team plugin options.
      *
      */
     function &_send_report_to()
@@ -291,7 +291,7 @@ class WpSwimTeamReportGeneratorForm extends WpSwimTeamForm
 
     /**
      * This is the method that builds the layout of
-     * the Swim Team plugin options.
+     * the Team Member Team plugin options.
      *
      */
     function &_report_filters()
@@ -307,24 +307,24 @@ class WpSwimTeamReportGeneratorForm extends WpSwimTeamForm
         $table->add_row($this->element_form("Results" . FEFILTER),
             $this->element_form("Results" . FEFILTERLB)) ;
 
-        //  Filter for optional swimmer field #1
+        //  Filter for optional team member field #1
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION1) == WPST_YES_NO)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION1) == WPST_YES_NO)
         {
             $table->add_row($this->element_form(
-                get_option(WPST_OPTION_SWIMMER_OPTION1_LABEL) . FEFILTER),
+                get_option(WPST_OPTION_TEAM_MEMBER_OPTION1_LABEL) . FEFILTER),
                 $this->element_form(
-                get_option(WPST_OPTION_SWIMMER_OPTION1_LABEL) . FEFILTERLB)) ;
+                get_option(WPST_OPTION_TEAM_MEMBER_OPTION1_LABEL) . FEFILTERLB)) ;
         }
 
-        //  Filter for optional swimmer field #2
+        //  Filter for optional team member field #2
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION2) == WPST_YES_NO)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION2) == WPST_YES_NO)
         {
             $table->add_row($this->element_form(
-                get_option(WPST_OPTION_SWIMMER_OPTION2_LABEL) . FEFILTER),
+                get_option(WPST_OPTION_TEAM_MEMBER_OPTION2_LABEL) . FEFILTER),
                 $this->element_form(
-                get_option(WPST_OPTION_SWIMMER_OPTION2_LABEL) . FEFILTERLB)) ;
+                get_option(WPST_OPTION_TEAM_MEMBER_OPTION2_LABEL) . FEFILTERLB)) ;
         }
 
         return $table ;
@@ -352,15 +352,15 @@ class WpSwimTeamReportGeneratorForm extends WpSwimTeamForm
         if ($this->get_element_value("Report") == WPST_GENERATE_STATIC_WEB_PAGE)
         {
             $csv = false ;
-            $this->__report = new SwimTeamReportGenerator() ;
-            //$this->__report = new SwimTeamInfoTable("Swim Team Report", "800px") ;
+            $this->__report = new TeamReportGenerator() ;
+            //$this->__report = new TeamInfoTable("Team Report", "800px") ;
             
         }
         else if ($this->get_element_value("Report") == WPST_GENERATE_CSV)
         {
             $csv = true ;
-            $this->__report = new SwimTeamReportGeneratorCSV() ;
-            //$this->__report = new SwimTeamInfoTable("Swim Team Report", "800px") ;
+            $this->__report = new TeamReportGeneratorCSV() ;
+            //$this->__report = new TeamInfoTable("Team Report", "800px") ;
             //$this->__report = new Container() ;
         }
         else
@@ -414,47 +414,47 @@ class WpSwimTeamReportGeneratorForm extends WpSwimTeamForm
         if (!is_null($this->get_element_value("Results")))
             $rpt->setResults(true) ;
 
-        if (!is_null($this->get_element_value("Swimmer Label")))
-            $rpt->setSwimmerLabel(true) ;
+        if (!is_null($this->get_element_value("Team Member Label")))
+            $rpt->setTeamMemberLabel(true) ;
 
         if (!is_null($this->get_element_value("Web Site Id")))
             $rpt->setWebSiteId(true) ;
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION1) != WPST_DISABLED)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION1) != WPST_DISABLED)
         {
-            if (!is_null($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION1_LABEL))))
+            if (!is_null($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION1_LABEL))))
             {
                 $rpt->setOption1(true) ;
             }
         }
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION2) != WPST_DISABLED)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION2) != WPST_DISABLED)
         {
-            if (!is_null($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION2_LABEL))))
+            if (!is_null($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION2_LABEL))))
             {
                 $rpt->setOption2(true) ;
             }
         }
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION3) != WPST_DISABLED)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION3) != WPST_DISABLED)
         {
-            if (!is_null($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION3_LABEL))))
+            if (!is_null($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION3_LABEL))))
             {
                 $rpt->setOption3(true) ;
             }
         }
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION4) != WPST_DISABLED)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION4) != WPST_DISABLED)
         {
-            if (!is_null($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION4_LABEL))))
+            if (!is_null($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION4_LABEL))))
             {
                 $rpt->setOption4(true) ;
             }
         }
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION5) != WPST_DISABLED)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION5) != WPST_DISABLED)
         {
-            if (!is_null($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION5_LABEL))))
+            if (!is_null($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION5_LABEL))))
             {
                 $rpt->setOption5(true) ;
             }
@@ -480,48 +480,48 @@ class WpSwimTeamReportGeneratorForm extends WpSwimTeamForm
             $rpt->setResultsFilterValue($this->get_element_value("Results" . FEFILTERLB)) ;
         }
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION1) != WPST_DISABLED)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION1) != WPST_DISABLED)
         {
-            if (!is_null($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION1_LABEL) . FEFILTER)))
+            if (!is_null($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION1_LABEL) . FEFILTER)))
             {
                 $rpt->setOption1Filter(true) ;
-                $rpt->setOption1FilterValue($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION1_LABEL) . FEFILTERLB)) ;
+                $rpt->setOption1FilterValue($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION1_LABEL) . FEFILTERLB)) ;
             }
         }
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION2) != WPST_DISABLED)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION2) != WPST_DISABLED)
         {
-            if (!is_null($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION2_LABEL) . FEFILTER)))
+            if (!is_null($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION2_LABEL) . FEFILTER)))
             {
                 $rpt->setOption2Filter(true) ;
-                $rpt->setOption2FilterValue($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION2_LABEL) . FEFILTERLB)) ;
+                $rpt->setOption2FilterValue($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION2_LABEL) . FEFILTERLB)) ;
             }
         }
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION3) != WPST_DISABLED)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION3) != WPST_DISABLED)
         {
-            if (!is_null($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION3_LABEL) . FEFILTER)))
+            if (!is_null($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION3_LABEL) . FEFILTER)))
             {
                 $rpt->setOption3Filter(true) ;
-                $rpt->setOption3FilterValue($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION3_LABEL) . FEFILTERLB)) ;
+                $rpt->setOption3FilterValue($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION3_LABEL) . FEFILTERLB)) ;
             }
         }
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION4) != WPST_DISABLED)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION4) != WPST_DISABLED)
         {
-            if (!is_null($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION4_LABEL) . FEFILTER)))
+            if (!is_null($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION4_LABEL) . FEFILTER)))
             {
                 $rpt->setOption4Filter(true) ;
-                $rpt->setOption4FilterValue($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION4_LABEL) . FEFILTERLB)) ;
+                $rpt->setOption4FilterValue($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION4_LABEL) . FEFILTERLB)) ;
             }
         }
 
-        if (get_option(WPST_OPTION_SWIMMER_OPTION5) != WPST_DISABLED)
+        if (get_option(WPST_OPTION_TEAM_MEMBER_OPTION5) != WPST_DISABLED)
         {
-            if (!is_null($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION5_LABEL) . FEFILTER)))
+            if (!is_null($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION5_LABEL) . FEFILTER)))
             {
                 $rpt->setOption5Filter(true) ;
-                $rpt->setOption5FilterValue($this->get_element_value(get_option(WPST_OPTION_SWIMMER_OPTION5_LABEL) . FEFILTERLB)) ;
+                $rpt->setOption5FilterValue($this->get_element_value(get_option(WPST_OPTION_TEAM_MEMBER_OPTION5_LABEL) . FEFILTERLB)) ;
             }
         }
 
@@ -529,7 +529,7 @@ class WpSwimTeamReportGeneratorForm extends WpSwimTeamForm
         
         //$this->__report = $rpt->getReport() ;
 
-        $this->set_action_message(sprintf("Swim Team Report Generated,
+        $this->set_action_message(sprintf("Team Report Generated,
             %s record%s returned.", $rpt->getRecordCount(),
             $rpt->getRecordCount() == 1 ? "" : "s")) ;
 

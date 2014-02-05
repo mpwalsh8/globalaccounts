@@ -43,6 +43,16 @@ class GlobalAccountsUserForm extends GlobalAccountsForm
         $this->__id = $id ;
     }
 
+    function getUserId()
+    {
+        return $this->__id ;
+    }
+
+    function setUserId($id)
+    {
+        $this->__id = $id ;
+    }
+
     /**
      * Get the array of results key and value pairs
      *
@@ -87,21 +97,23 @@ class GlobalAccountsUserForm extends GlobalAccountsForm
      */
     function form_init_elements()
     {
-        $name = new FEText("Name", true, "200px") ;
+        $isadmin = current_user_can('manage_options') ;
+
+        $name = new FEText("Name", !$isadmin, "200px") ;
         $name->set_disabled(true) ;
         $this->add_element($name) ;
 
         $this->add_hidden_element("WpUserId") ;
         $this->add_hidden_element("_action") ;
 
-        $street1 = new FEText("Street 1", true, "250px") ;
+        $street1 = new FEText("Street 1", !$isadmin, "250px") ;
         $this->add_element($street1) ;
         $street2 = new FEText("Street 2", false, "250px") ;
         $this->add_element($street2) ;
         $street3 = new FEText("Street 3", false, "250px") ;
         $this->add_element($street3) ;
 
-        $city = new FEText("City", true, "200px") ;
+        $city = new FEText("City", !$isadmin, "200px") ;
         $this->add_element($city) ;
 
         //  How to handle the portion of the address which is
@@ -114,18 +126,18 @@ class GlobalAccountsUserForm extends GlobalAccountsForm
         $geography = get_option(WPGA_OPTION_GEOGRAPHY) ;
 
         if ($geography == WPGA_US_ONLY)
-            $state = new FEUnitedStates($label, true, "200px") ;
+            $state = new FEUnitedStates($label, !$isadmin, "200px") ;
         else
-            $state = new FEText($label, true, "250px") ;
+            $state = new FEText($label, !$isadmin, "250px") ;
 
         $this->add_element($state) ;
 
         $label = get_option(WPGA_OPTION_USER_POSTAL_CODE_LABEL) ;
 
         if ($geography == WPGA_US_ONLY)
-            $postalcode = new FEZipcode($label, true, "100px") ;
+            $postalcode = new FEZipcode($label, !$isadmin, "100px") ;
         else
-            $postalcode = new FEText($label, true, "200px") ;
+            $postalcode = new FEText($label, !$isadmin, "200px") ;
 
         $this->add_element($postalcode) ;
 
@@ -134,27 +146,27 @@ class GlobalAccountsUserForm extends GlobalAccountsForm
         //  receive a text box.
  
         if ($geography == WPGA_EU_ONLY)
-            $country = new FEEuropeanUnion("Country", true, "150px") ;
+            $country = new FEEuropeanUnion("Country", !$isadmin, "150px") ;
         else
-            $country = new FEText("Country", true, "200px") ;
+            $country = new FEText("Country", !$isadmin, "200px") ;
 
         if ($geography == WPGA_US_ONLY)
             $country->set_disabled(true) ;
         $this->add_element($country) ;
 
-        $primaryphone = new FEText("Primary Phone", true, "150px") ;
+        $primaryphone = new FEText("Primary Phone", !$isadmin, "150px") ;
         $this->add_element($primaryphone) ;
 
-        $secondaryphone = new FEText("Secondary Phone", true, "150px") ;
+        $secondaryphone = new FEText("Secondary Phone", !$isadmin, "150px") ;
         $this->add_element($secondaryphone) ;
 
-        $gender = new FEListBox("Gender", true, "100px") ;
+        $gender = new FEListBox("Gender", !$isadmin, "100px") ;
         $gender->set_list_data($this->_genderSelection()) ;
 
         $this->add_element($gender) ;
 
         //  Day of Birth field
-        $dob = new FEDay("Day of Birth", false, null, null, "Fd") ;
+        $dob = new FEDay("Day of Birth", !$isadmin, null, null, "Fd") ;
         $this->add_element($dob) ;
 
         //  Handle the optional user fields, there are as many as 5
@@ -164,7 +176,7 @@ class GlobalAccountsUserForm extends GlobalAccountsForm
         $label = get_option(WPGA_OPTION_USER_OPTION1_LABEL) ;
 
         if ($option == WPGA_REQUIRED)
-            $this->add_element(new FEText($label, true, "250px")) ;
+            $this->add_element(new FEText($label, !$isadmin, "250px")) ;
         else if ($option == WPGA_OPTIONAL)
             $this->add_element(new FEText($label, false, "250px")) ;
         else
@@ -175,7 +187,7 @@ class GlobalAccountsUserForm extends GlobalAccountsForm
         $label = get_option(WPGA_OPTION_USER_OPTION2_LABEL) ;
 
         if ($option == WPGA_REQUIRED)
-            $this->add_element(new FEText($label, true, "250px")) ;
+            $this->add_element(new FEText($label, !$isadmin, "250px")) ;
         else if ($option == WPGA_OPTIONAL)
             $this->add_element(new FEText($label, false, "250px")) ;
         else
@@ -186,7 +198,7 @@ class GlobalAccountsUserForm extends GlobalAccountsForm
         $label = get_option(WPGA_OPTION_USER_OPTION3_LABEL) ;
 
         if ($option == WPGA_REQUIRED)
-            $this->add_element(new FEText($label, true, "250px")) ;
+            $this->add_element(new FEText($label, !$isadmin, "250px")) ;
         else if ($option == WPGA_OPTIONAL)
             $this->add_element(new FEText($label, false, "250px")) ;
         else
@@ -197,7 +209,7 @@ class GlobalAccountsUserForm extends GlobalAccountsForm
         $label = get_option(WPGA_OPTION_USER_OPTION4_LABEL) ;
 
         if ($option == WPGA_REQUIRED)
-            $this->add_element(new FEText($label, true, "250px")) ;
+            $this->add_element(new FEText($label, !$isadmin, "250px")) ;
         else if ($option == WPGA_OPTIONAL)
             $this->add_element(new FEText($label, false, "250px")) ;
         else
@@ -208,7 +220,7 @@ class GlobalAccountsUserForm extends GlobalAccountsForm
         $label = get_option(WPGA_OPTION_USER_OPTION5_LABEL) ;
 
         if ($option == WPGA_REQUIRED)
-            $this->add_element(new FEText($label, true, "250px")) ;
+            $this->add_element(new FEText($label, !$isadmin, "250px")) ;
         else if ($option == WPGA_OPTIONAL)
             $this->add_element(new FEText($label, false, "250px")) ;
         else
@@ -216,27 +228,27 @@ class GlobalAccountsUserForm extends GlobalAccountsForm
 
         //  Size fields - eventually these will go on another tab
  
-        $dressshirt = new FEListBox("Dress Shirt Size", true, "75px") ;
+        $dressshirt = new FEListBox("Dress Shirt Size", !$isadmin, "75px") ;
         $dressshirt->set_list_data($this->_sizeSelection()) ;
 
         $this->add_element($dressshirt) ;
 
-        $poloshirt = new FEListBox("Polo Shirt Size", true, "75px") ;
+        $poloshirt = new FEListBox("Polo Shirt Size", !$isadmin, "75px") ;
         $poloshirt->set_list_data($this->_sizeSelection()) ;
 
         $this->add_element($poloshirt) ;
 
-        $teeshirt = new FEListBox("Tee Shirt Size", true, "75px") ;
+        $teeshirt = new FEListBox("Tee Shirt Size", !$isadmin, "75px") ;
         $teeshirt->set_list_data($this->_sizeSelection()) ;
 
         $this->add_element($teeshirt) ;
 
-        $jacket = new FEListBox("Jacket Size", true, "75px") ;
+        $jacket = new FEListBox("Jacket Size", !$isadmin, "75px") ;
         $jacket->set_list_data($this->_sizeSelection()) ;
 
         $this->add_element($jacket) ;
 
-        $sweater = new FEListBox("Sweater Size", true, "75px") ;
+        $sweater = new FEListBox("Sweater Size", !$isadmin, "75px") ;
         $sweater->set_list_data($this->_sizeSelection()) ;
 
         $this->add_element($sweater) ;
@@ -491,7 +503,7 @@ class GlobalAccountsUserForm extends GlobalAccountsForm
         $p = $this->get_element_value("Primary Phone") ;
         $s = $this->get_element_value("Secondary Phone") ;
 
-        if ($p == $s)
+        if (($p == $s) && ($p . $s != ''))
         {
             $this->add_error("Primary Phone", "Primary Phone is the same as the Secondary Phone.") ;
             $this->add_error("Secondary Phone", "Secondary Phone is the same as the Primary Phone.") ;
@@ -579,9 +591,20 @@ class GlobalAccountsUserForm extends GlobalAccountsForm
     function form_success()
     {
         $container = container() ;
-        $container->add(html_h3("Global Accounts profile updated.")) ;
+        $container->add(html_div("updated fade", html_h4("Global Accounts profile updated."))) ;
 
         return $container ;
     }
+}
+
+/**
+ * Construct the User form
+ *
+ * @author Mike Walsh <mike_walsh@mindspring.com>
+ * @access public
+ * @see GlobalAccountsForm
+ */
+class GlobalAccountsUserUpdateForm extends GlobalAccountsUserForm
+{
 }
 ?>
