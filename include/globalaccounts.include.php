@@ -30,10 +30,15 @@ define('WPGA_SIZE_XS', 'xs') ;
 define('WPGA_SIZE_S', 's') ;
 define('WPGA_SIZE_M', 'm') ;
 define('WPGA_SIZE_L', 'l') ;
+define('WPGA_SIZE_LT', 'lt') ;
 define('WPGA_SIZE_XL', 'xl') ;
+define('WPGA_SIZE_XLT', 'xlt') ;
 define('WPGA_SIZE_2XL', '2xl') ;
+define('WPGA_SIZE_2XLT', '2xlt') ;
 define('WPGA_SIZE_3XL', '3xl') ;
+define('WPGA_SIZE_3XLT', '3xlt') ;
 define('WPGA_SIZE_4XL', '4xl') ;
+define('WPGA_SIZE_4XLT', '4xlt') ;
 
 define("WPGA_ENABLED", "enabled") ;
 define("WPGA_DISABLED", "disabled") ;
