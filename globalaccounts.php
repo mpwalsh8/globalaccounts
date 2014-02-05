@@ -185,6 +185,7 @@ function globalaccounts_install()
             PRIMARY KEY  (id)
 	    );" ;
       
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' ) ;
         dbDelta($sql) ;
 
         //  Construct or update the MGC Divisions table
