@@ -55,7 +55,7 @@ define("WPGA_DB_PREFIX", $wpdb->prefix . "ga_") ;
 /**
  * Database version - stored as a WP option
  */
-define("WPGA_DB_VERSION", "0.13") ;
+define("WPGA_DB_VERSION", "0.14") ;
 define("WPGA_DB_OPTION", WPGA_DB_PREFIX . "db_version") ;
 
 ?>

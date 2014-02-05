@@ -80,10 +80,15 @@ class GlobalAccountsUserForm extends GlobalAccountsForm
             ,strtoupper(WPGA_SIZE_S) => WPGA_SIZE_S
             ,strtoupper(WPGA_SIZE_M) => WPGA_SIZE_M
             ,strtoupper(WPGA_SIZE_L) => WPGA_SIZE_L
+            ,strtoupper(WPGA_SIZE_LT) => WPGA_SIZE_LT
             ,strtoupper(WPGA_SIZE_XL) => WPGA_SIZE_XL
+            ,strtoupper(WPGA_SIZE_XLT) => WPGA_SIZE_XLT
             ,strtoupper(WPGA_SIZE_2XL) => WPGA_SIZE_2XL
+            ,strtoupper(WPGA_SIZE_2XLT) => WPGA_SIZE_2XLT
             ,strtoupper(WPGA_SIZE_3XL) => WPGA_SIZE_3XL
+            ,strtoupper(WPGA_SIZE_3XLT) => WPGA_SIZE_3XLT
             ,strtoupper(WPGA_SIZE_4XL) => WPGA_SIZE_4XL
+            ,strtoupper(WPGA_SIZE_4XLT) => WPGA_SIZE_4XLT
             ) ;
 
          return $s ;
